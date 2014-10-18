@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Limiting process memory to $1 MiB"
+ulimit -Sv $(expr 1024 \* $1)
+sh -c $2
