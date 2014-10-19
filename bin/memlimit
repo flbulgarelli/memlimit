@@ -1,5 +1,9 @@
 #!/bin/bash
 
-echo -e "\e[31mLimiting process memory to \e[1m$1 MiB\e[0m"
-ulimit -Sv $(expr 1024 \* $1)
-sh -c $2
+SIZE=$1
+shift
+COMMAND=$@
+
+echo -e "\e[31mLimiting process memory to \e[1m$SIZE MiB\e[0m"
+ulimit -Sv $(expr 1024 \* $SIZE)
+sh -c "$COMMAND"
