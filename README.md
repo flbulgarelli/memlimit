@@ -10,11 +10,15 @@ But other interpreters will by default ask for more memory to your OS until it e
 
 # Some samples you SHOULD NOT run
 
+Using ```ghci```: 
+
 ```haskell
 sum [1..]
 ```
 
 (Ouch, sum is not implemented with foldl')
+
+Using ```erl```:
 
 ```erlang
 lists:duplicate(10000000, 3).
@@ -32,10 +36,22 @@ alias YOUR_COMMAND = "memlimit MAX_SIZE YOUR_COMMAND"
 
 # Example
 
+Limiting ```ghci``` limit to 1GiB - it will crash if such limit is exceeded:
+
 ```bash
 alias ghci="memlimit 1024 ghci"
 ```
 
-#¿Why just not use a global memory limit?
+# FAQ 
+
+## Why just not use a global memory limit?
 
 Becasue I want to only limit certain commands. 
+
+## How does it work?
+
+It simply opens a new shell in the context of ```ulimint```
+
+## Caveats
+
+```memlimit``` does not work as expected if memlimited process forks themself. If you need a true black-box memory or time limit, consider using something like https://github.com/pshved/timeout
